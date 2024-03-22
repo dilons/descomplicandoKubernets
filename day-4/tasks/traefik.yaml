@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: traefik
+  name: traefik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: traefik
+    spec:
+      containers:
+      - image: traefik:latest
+        name: traefik
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: 256Mi
+          requests:
+            cpu: "0.25"
+            memory: 128Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10 
+          periodSeconds: 10 
+          timeoutSeconds: 5 
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10 
+          timeoutSeconds: 5 
+          failureThreshold: 3
+          successThreshold: 1
+        startupProbe:
+          tcpSocket: 
+            port: 80
+          initialDelaySeconds: 10
+          timeoutSeconds: 5 
+          failureThreshold: 1
+          
