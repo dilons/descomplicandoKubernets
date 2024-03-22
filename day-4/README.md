@@ -15,4 +15,10 @@ daemonsets e replicasets não são criados via CLI, apenas por manifestos
 
 ------
 
-probes
+resumo probes
+
+dependendo da configuração, servem para garantir que caso ocorro problema com o POD, o k8s, toma uma ação, seja reiniciar o pod ou remover o pod do cluster
+
+liveness -> saber se o pod está vivo 
+startup -> executar um teste pra saber se ele foi startadado
+readness -> valida se o pod está OK para receber requisições externas

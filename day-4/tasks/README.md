@@ -1,0 +1,1 @@
+Crie 3 deploymentes diferentes utilizando, limites de recurso, estratégias de deploy e probes.
